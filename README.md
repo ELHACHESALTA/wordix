@@ -11,3 +11,4 @@ Universidad Nacional del Comahue
 # Integrantes del Grupo
 
 **Julio Federico Herrera** - Legajo: FAI-4285 - Mail: julio.herrera@est.fi.uncoma.edu.ar - GitHub: ELHACHESALTA
+**Guillermo Andres Agüero Mendez** - Legajo: FAI-3844 - Mail: guillermo.aguero@est.fi.uncoma.edu.ar - GitHub: guillermoagueronqn
