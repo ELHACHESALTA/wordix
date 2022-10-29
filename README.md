@@ -12,3 +12,4 @@ Universidad Nacional del Comahue
 
 **Julio Federico Herrera** - Legajo: FAI-4285 - Mail: julio.herrera@est.fi.uncoma.edu.ar - GitHub: ELHACHESALTA
 **Guillermo Andres Agüero Mendez** - Legajo: FAI-3844 - Mail: guillermo.aguero@est.fi.uncoma.edu.ar - GitHub: guillermoagueronqn
+**Jazmin Loureiro** - Legajo: FAI-4228 - Mail: jazmin.loureiro@est,fi,uncoma.edu.ar - GitHub: Jazmin-Loureiro 
