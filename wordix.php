@@ -27,18 +27,21 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
+ *  Corrobora que un número se encuentre entre un mínimo y un máximo 
+ * @param int $min
+ * @param int $max
+ * @return int
  */
-function solicitarNumeroEntre($min, $max)
-{
+function solicitarNumeroEntre($min, $max) {
     //int $numero
-    $numero = trim(fgets(STDIN));
-    while (!is_int($numero) && !($numero >= $min && $numero <= $max)) {
+    $numero = (trim(fgets(STDIN)));
+    while ((((int)($numero) != $numero)) || (!($numero >= $min && $numero <= $max))) {
         echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
         $numero = trim(fgets(STDIN));
     }
     return $numero;
 }
+   
 
 /**
  * Escrbir un texto en color ROJO
@@ -112,7 +115,8 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * Escribe en pantalla un mensaje de bienvenida para el usuario ingresado
+ * @param string $usuario
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -125,7 +129,9 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * Comprueba que los caracteres de la palabra ingresada sean verdaderamente letras
+ * @param string $cadena
+ * @return boolean
  */
 function esPalabra($cadena)
 {
@@ -141,7 +147,8 @@ function esPalabra($cadena)
 }
 
 /**
- *  ****COMPLETAR*****
+ * Solicita una palabra de 5 letras, y la retorna en mayúscula solo cuando es de 5 letras
+ * @return string
  */
 function leerPalabra5Letras()
 {
@@ -159,7 +166,7 @@ function leerPalabra5Letras()
 
 
 /**
- * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
+ * Inicia una estructura de datos de tipo asociativo llamada "Teclado"
  *@return array
  */
 function iniciarTeclado()
