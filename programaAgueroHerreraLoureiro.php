@@ -77,6 +77,33 @@ function seleccionarOpcion () {
     return $resultado;
 }
 
+///////////////////////////// FUNCION 4 /////////////////////////////////////////
+    //Reusamos la función del código fuente leerPalabra5Letras()
+
+///////////////////////////// FUNCION 5 /////////////////////////////////////////
+    //Reusamos la función del código fuente solicitarNumeroEntre()
+
+///////////////////////////// FUNCION 6 /////////////////////////////////////////
+    /**
+     * Muestra los datos de una partida seleccionada
+     * @param int $numeroPartidaIR
+     */
+    function imprimirResultado($numeroPartidaIR) {
+        // array $coleccionPartidasIR
+        $numeroPartidaIR = $numeroPartidaIR - 1;
+        $coleccionPartidasIP = cargarPartidas();
+        echo "**********************************\n";
+        echo "Partida WORDIX " . $numeroPartidaIR . ": palabra " . $coleccionPartidasIP[$numeroPartidaIR]["palabraWordix"] . "\n";
+        echo "Jugador: " . $coleccionPartidasIP[$numeroPartidaIR]["jugador"] . "\n";
+        echo "Puntaje: " . $coleccionPartidasIP[$numeroPartidaIR]["puntaje"] . " puntos" . "\n";
+        if ($coleccionPartidasIP[$numeroPartidaIR]["intentos"] != 0) {
+            echo "Intento: Adivinó la palabra en " . $coleccionPartidasIP[$numeroPartidaIR]["intentos"] . " intentos\n";
+        } else {
+            echo "Intento: No adivinó la palabra\n";
+        }
+        echo "**********************************\n";
+    }
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -89,7 +116,6 @@ function seleccionarOpcion () {
 
 
 //Proceso:
-
 $partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
