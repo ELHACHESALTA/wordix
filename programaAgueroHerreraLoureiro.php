@@ -53,7 +53,29 @@ function cargarPartidas(){
     return $coleccionPartidas;
 }
 
-
+///////////////////////////// FUNCION 3 /////////////////////////////////////////
+/**
+ * Muestra el menu de opciones al jugador, le solicita una opcion valida y retorna la misma
+ * @return int
+ */
+function seleccionarOpcion () {
+    /* int $resultado */
+    echo "***************************************************\n";
+    echo "**************** Menú de opciones: ****************\n";
+    echo "***************************************************";
+    echo " 
+    1) Jugar al Wordix con una palabra elegida 
+    2) Jugar al Wordix con una palabra aleatoria
+    3) Mostrar una partida 
+    4) Mostrar la primer partida ganadora 
+    5) Mostrar resumen de Jugador  
+    6) Mostrar listado de partidas ordenadas por jugador y por palabra 
+    7) Agregar una palabra de 5 letras a Wordix  
+    8) Salir 
+    ¿Qué desea hacer? Seleccione una opcion: ";
+    $resultado = solicitarNumeroEntre (1, 8);
+    return $resultado;
+}
 
 
 /**************************************/
