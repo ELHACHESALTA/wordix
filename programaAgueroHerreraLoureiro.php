@@ -40,13 +40,13 @@ function cargarColeccionPalabras()
 function cargarPartidas(){
     // array $coleccionPartidas
     $coleccionPartidas = [];
-    $coleccionPartidas[0]=["palabraWordix"=>"QUESO", "jugador"=>"majo", "intentos"=>6, "puntaje"=>10];
+    $coleccionPartidas[0]=["palabraWordix"=>"QUESO", "jugador"=>"majo", "intentos"=>0, "puntaje"=>0];
     $coleccionPartidas[1]=["palabraWordix"=>"CASAS", "jugador"=>"julio", "intentos"=>3, "puntaje"=>14];
     $coleccionPartidas[2]=["palabraWordix"=>"MUJER", "jugador"=>"rudolf", "intentos"=>4, "puntaje"=>13];
     $coleccionPartidas[3]=["palabraWordix"=>"YUYOS", "jugador"=>"jazmin", "intentos"=>6, "puntaje"=>12];
     $coleccionPartidas[4]=["palabraWordix"=>"NAVES", "jugador"=>"julio", "intentos"=>4, "puntaje"=>13];
     $coleccionPartidas[5]=["palabraWordix"=>"PISOS", "jugador"=>"majo", "intentos"=>3, "puntaje"=>14];
-    $coleccionPartidas[6]=["palabraWordix"=>"FUEGO", "jugador"=>"andres", "intentos"=>6, "puntaje"=>0];
+    $coleccionPartidas[6]=["palabraWordix"=>"FUEGO", "jugador"=>"andres", "intentos"=>0, "puntaje"=>0];
     $coleccionPartidas[7]=["palabraWordix"=>"RASGO", "jugador"=>"jazmin", "intentos"=>1, "puntaje"=>16];
     $coleccionPartidas[8]=["palabraWordix"=>"GATOS", "jugador"=>"majo", "intentos"=>2, "puntaje"=>15];
     $coleccionPartidas[9]=["palabraWordix"=>"GOTAS", "jugador"=>"rudolf", "intentos"=>6, "puntaje"=>11];
@@ -103,6 +103,43 @@ function seleccionarOpcion () {
         }
         echo "**********************************\n";
     }
+
+///////////////////////////// FUNCION 7 /////////////////////////////////////////
+/**
+ * Se modifica la estructura de palabras al agregarse una nueva palabra
+ * @param array $coleccionPalabrasAP
+ * @param string $palabraAP
+ * @return array
+ */
+function agregarPalabra($coleccionPalabrasAP, $palabraAP){
+    array_push($coleccionPalabrasAP, $palabraAP);
+    return $coleccionPalabrasAP;
+}
+
+///////////////////////////// FUNCION 8 /////////////////////////////////////////
+/**
+ * Retorna el indice de la primera partida ganada por un jugador, si jugó pero nunca ganó retorna -1 y si no jugó retorna -2
+ * @param array $coleccionPartidasIPG
+ * @param string $nombreJugadorIPG
+ * @return int
+ */
+function indicePrimeraGanada ($coleccionPartidasIPG, $nombreJugadorIPG){
+    // int $n, $i, $indiceFinal
+    $n = count($coleccionPartidasIPG);
+    $i = 0;
+    $indiceFinal = -2;
+    while (($i < $n) && ($indiceFinal==-2 || $indiceFinal==-1)){
+        if ($coleccionPartidasIPG[$i]["jugador"]==$nombreJugadorIPG){
+            if ($coleccionPartidasIPG[$i]["puntaje"] > 0){
+                $indiceFinal = $i;
+            } elseif ($coleccionPartidasIPG[$i]["puntaje"] == 0){
+                $indiceFinal = -1;
+            }
+        }
+        $i = $i+1;
+    }
+    return $indiceFinal;
+}
 
 
 /**************************************/
