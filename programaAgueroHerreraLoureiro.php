@@ -265,6 +265,7 @@ function ordenaPartidas ($coleccionPartidasOP){
 //Declaración de variables:
 // int $opcion, $nArregloPalabras, $numeroElegidoPP, $nArregloPartidasPP, $iPP (case 1)
 // int $numeroAleatorioPP (case 2)
+// int $numeroPartidaPP (case 3)
 
 
 // string $nombreJugadorPP, $palabraElegida (case 1)
@@ -329,7 +330,10 @@ do {
             array_push($coleccionPartidasPP, $partidaJugada);
             break;
         case 3:
-            
+            $nArregloPartidasPP = count($coleccionPartidasPP);
+            echo "¿Qué partida desea mostrar? Ingrese un número entre 1 y " . $nArregloPartidasPP . ": ";
+            $numeroPartidaPP = solicitarNumeroEntre(1, $nArregloPartidasPP);
+            imprimirResultado($numeroPartidaPP, $coleccionPartidasPP);
             break;
         case 4:
             
@@ -338,7 +342,7 @@ do {
             
             break;
         case 6:
-            
+            ordenaPartidas($coleccionPartidasPP);
             break;
         case 7:
             
