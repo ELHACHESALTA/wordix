@@ -87,17 +87,16 @@ function seleccionarOpcion () {
     /**
      * Muestra los datos de una partida seleccionada
      * @param int $numeroPartidaIR
+     * @param array $coleccionPartidasIR
      */
-    function imprimirResultado($numeroPartidaIR) {
-        // array $coleccionPartidasIR
+    function imprimirResultado($numeroPartidaIR, $coleccionPartidasIR) {
         $numeroPartidaIR = $numeroPartidaIR - 1;
-        $coleccionPartidasIP = cargarPartidas();
         echo "**********************************\n";
-        echo "Partida WORDIX " . $numeroPartidaIR . ": palabra " . $coleccionPartidasIP[$numeroPartidaIR]["palabraWordix"] . "\n";
-        echo "Jugador: " . $coleccionPartidasIP[$numeroPartidaIR]["jugador"] . "\n";
-        echo "Puntaje: " . $coleccionPartidasIP[$numeroPartidaIR]["puntaje"] . " puntos" . "\n";
-        if ($coleccionPartidasIP[$numeroPartidaIR]["intentos"] != 0) {
-            echo "Intento: Adivinó la palabra en " . $coleccionPartidasIP[$numeroPartidaIR]["intentos"] . " intentos\n";
+        echo "Partida WORDIX " . $numeroPartidaIR . ": palabra " . $coleccionPartidasIR[$numeroPartidaIR]["palabraWordix"] . "\n";
+        echo "Jugador: " . $coleccionPartidasIR[$numeroPartidaIR]["jugador"] . "\n";
+        echo "Puntaje: " . $coleccionPartidasIR[$numeroPartidaIR]["puntaje"] . " puntos" . "\n";
+        if ($coleccionPartidasIR[$numeroPartidaIR]["intentos"] != 0) {
+            echo "Intento: Adivinó la palabra en " . $coleccionPartidasIR[$numeroPartidaIR]["intentos"] . " intentos\n";
         } else {
             echo "Intento: No adivinó la palabra\n";
         }
@@ -205,6 +204,24 @@ function retornaResumenJugador ($coleccionPartidasRRJ, $nombreJugadorRRJ){
     return $resumenJugador;
 }
 
+///////////////////////////// FUNCION 10 /////////////////////////////////////////
+/**
+ * Retorna el nombre del usuario en minusculas
+ * @return string
+ */
+function solicitarJugador (){
+    // string $nombreIngresado, $primerLetra, $nombreFinal
+    echo "Ingrese el nombre de un jugador: ";
+    $nombreIngresado = trim(fgets(STDIN));
+    $primerLetra = $nombreIngresado[0];
+    while (!(ctype_alpha($primerLetra))){
+        echo "Debe ingresar un nombre de jugador que empiece con letra: ";
+        $nombreIngresado = trim(fgets(STDIN));
+        $primerLetra = $nombreIngresado[0];
+    }
+    $nombreFinal = strtolower($nombreIngresado);
+    return $nombreFinal;
+}
 
 
 /**************************************/
