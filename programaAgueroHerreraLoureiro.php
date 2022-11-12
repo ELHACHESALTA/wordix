@@ -141,6 +141,71 @@ function indicePrimeraGanada ($coleccionPartidasIPG, $nombreJugadorIPG){
     return $indiceFinal;
 }
 
+///////////////////////////// FUNCION 9 /////////////////////////////////////////
+/**
+ * Retorna el resumen de un jugador a partir de una coleccion de partidas y del nombre del jugador
+ * @param array $coleccionPartidasRRJ
+ * @param string $nombreJugadorRRJ
+ * @return array
+ */
+function retornaResumenJugador ($coleccionPartidasRRJ, $nombreJugadorRRJ){
+    // array $resumenJugador
+    // int $n, $i, $partidasTotales, $puntajeTotal, $victoriasTotales, $intento1Total, $intento2Total
+    // int $intento3Total, $intento4Total, $intento5Total, $intento6Total
+    $partidasTotales = 0;
+    $puntajeTotal = 0;
+    $victoriasTotales = 0;
+    $intento1Total = 0;
+    $intento2Total = 0;
+    $intento3Total = 0;
+    $intento4Total = 0;
+    $intento5Total = 0;
+    $intento6Total = 0;
+    $resumenJugador = [];
+    $n = count($coleccionPartidasRRJ);
+    for ($i=0; $i < $n; $i++){
+        if($coleccionPartidasRRJ[$i]["jugador"] == $nombreJugadorRRJ){
+            $partidasTotales = $partidasTotales + 1;
+            $puntajeTotal = $puntajeTotal + $coleccionPartidasRRJ[$i]["puntaje"];
+            if ($coleccionPartidasRRJ[$i]["puntaje"] > 0){
+                $victoriasTotales = $victoriasTotales + 1;
+            }
+            switch ($coleccionPartidasRRJ[$i]["intentos"]){
+                case 1:
+                    $intento1Total++;
+                    break;
+                case 2:
+                    $intento2Total++;
+                    break;
+                case 3:
+                    $intento3Total++;
+                    break;
+                case 4:
+                    $intento4Total++;
+                    break;
+                case 5:
+                    $intento5Total++;
+                    break;
+                case 6:
+                    $intento6Total++;
+                    break;
+            }
+        }
+    }
+    $resumenJugador["jugador"] = $nombreJugadorRRJ;
+    $resumenJugador["partidas"] = $partidasTotales;
+    $resumenJugador["puntaje"] = $puntajeTotal;
+    $resumenJugador["victorias"] = $victoriasTotales;
+    $resumenJugador["intento1"] = $intento1Total;
+    $resumenJugador["intento2"] = $intento2Total;
+    $resumenJugador["intento3"] = $intento3Total;
+    $resumenJugador["intento4"] = $intento4Total;
+    $resumenJugador["intento5"] = $intento5Total;
+    $resumenJugador["intento6"] = $intento6Total;
+    return $resumenJugador;
+}
+
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -182,3 +247,4 @@ do {
     }
 } while ($opcion != X);
 */
+
