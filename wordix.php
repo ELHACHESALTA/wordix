@@ -344,7 +344,7 @@ function obtenerPuntajeWordix($palabraOPW, $intentosOPW, $esGanadorOPW) {
                 $puntajePalabraOPW = $puntajePalabraOPW + 1;
             } elseif  ($palabraOPW[$iOPW] <= "M") {
                 $puntajePalabraOPW = $puntajePalabraOPW + 2; 
-            } elseif  ($palabraOPW[$iOPW] > "M") {
+            } else {
                 $puntajePalabraOPW = $puntajePalabraOPW + 3; 
             }
         }

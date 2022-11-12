@@ -266,6 +266,7 @@ function ordenaPartidas ($coleccionPartidasOP){
 // int $opcion, $nArregloPalabras, $numeroElegidoPP, $nArregloPartidasPP, $iPP (case 1)
 // int $numeroAleatorioPP (case 2)
 // int $numeroPartidaPP (case 3)
+// int $primeraGanada (case 4)
 
 
 // string $nombreJugadorPP, $palabraElegida (case 1)
@@ -336,7 +337,17 @@ do {
             imprimirResultado($numeroPartidaPP, $coleccionPartidasPP);
             break;
         case 4:
-            
+            echo "Para poder ver la primera partida ganada, ";
+            $nombreJugadorPP = solicitarJugador();
+            $primeraGanada = indicePrimeraGanada($coleccionPartidasPP, $nombreJugadorPP);
+            if ($primeraGanada == -2){
+                echo "No existe el jugador \n";
+            } elseif ($primeraGanada == -1){
+                echo "El jugador " . $nombreJugadorPP . " no ganó ninguna partida \n";
+            } else {
+                $primeraGanada = $primeraGanada + 1;
+                imprimirResultado($primeraGanada, $coleccionPartidasPP);
+            }
             break;
         case 5:
             
