@@ -84,24 +84,24 @@ function seleccionarOpcion () {
     //Reusamos la función del código fuente solicitarNumeroEntre()
 
 ///////////////////////////// FUNCION 6 /////////////////////////////////////////
-    /**
-     * Muestra los datos de una partida seleccionada
-     * @param int $numeroPartidaIR
-     * @param array $coleccionPartidasIR
-     */
-    function imprimirResultado($numeroPartidaIR, $coleccionPartidasIR) {
-        $numeroPartidaIR = $numeroPartidaIR - 1;
-        echo "**********************************\n";
-        echo "Partida WORDIX " . $numeroPartidaIR . ": palabra " . $coleccionPartidasIR[$numeroPartidaIR]["palabraWordix"] . "\n";
-        echo "Jugador: " . $coleccionPartidasIR[$numeroPartidaIR]["jugador"] . "\n";
-        echo "Puntaje: " . $coleccionPartidasIR[$numeroPartidaIR]["puntaje"] . " puntos" . "\n";
-        if ($coleccionPartidasIR[$numeroPartidaIR]["intentos"] != 0) {
-            echo "Intento: Adivinó la palabra en " . $coleccionPartidasIR[$numeroPartidaIR]["intentos"] . " intentos\n";
-        } else {
-            echo "Intento: No adivinó la palabra\n";
-        }
-        echo "**********************************\n";
+/**
+ * Muestra los datos de una partida seleccionada
+ * @param int $numeroPartidaIR
+ * @param array $coleccionPartidasIR
+ */
+function imprimirResultado($numeroPartidaIR, $coleccionPartidasIR) {
+    $numeroPartidaIR = $numeroPartidaIR - 1;
+    echo "**********************************\n";
+    echo "Partida WORDIX " . $numeroPartidaIR . ": palabra " . $coleccionPartidasIR[$numeroPartidaIR]["palabraWordix"] . "\n";
+    echo "Jugador: " . $coleccionPartidasIR[$numeroPartidaIR]["jugador"] . "\n";
+    echo "Puntaje: " . $coleccionPartidasIR[$numeroPartidaIR]["puntaje"] . " puntos" . "\n";
+    if ($coleccionPartidasIR[$numeroPartidaIR]["intentos"] != 0) {
+        echo "Intento: Adivinó la palabra en " . $coleccionPartidasIR[$numeroPartidaIR]["intentos"] . " intentos\n";
+    } else {
+        echo "Intento: No adivinó la palabra\n";
     }
+    echo "**********************************\n";
+}
 
 ///////////////////////////// FUNCION 7 /////////////////////////////////////////
 /**
@@ -263,12 +263,14 @@ function ordenaPartidas ($coleccionPartidasOP){
 /**************************************/
 
 //Declaración de variables:
-// int $opcion, $nArregloPalabras, $numeroElegidoPP, $nArregloPartidasPP
+// int $opcion, $nArregloPalabras, $numeroElegidoPP, $nArregloPartidasPP, $iPP (case 1)
+// int $numeroAleatorioPP (case 2)
 
 
-// string $nombreJugadorPP, $palabraElegida
+// string $nombreJugadorPP, $palabraElegida (case 1)
+// string $palabraAleatoria (case 2)
 
-// array $partidaJugada
+// array $partidaJugada (case 1)
 
 
 //Inicialización de variables:
@@ -276,8 +278,6 @@ function ordenaPartidas ($coleccionPartidasOP){
 $coleccionPartidasPP = cargarPartidas ();
 //b) Precarga de la estructura de las palabras
 $coleccionPalabrasPP = cargarColeccionPalabras();
-
-$iPP = 0;
 
 //Proceso:
  
@@ -292,6 +292,7 @@ do {
             $numeroElegidoPP = ($numeroElegidoPP-1);
             $palabraElegida = $coleccionPalabrasPP[$numeroElegidoPP];
             $nArregloPartidasPP = count($coleccionPartidasPP);
+            $iPP = 0;
             while ($iPP < $nArregloPartidasPP){
                 if (($palabraElegida == $coleccionPartidasPP[$iPP]["palabraWordix"]) && ($nombreJugadorPP == $coleccionPartidasPP[$iPP]["jugador"])){
                     echo "El jugador " . $nombreJugadorPP . " ya ha jugado con esta palabra. Ingrese otro número: ";
@@ -307,7 +308,25 @@ do {
             array_push($coleccionPartidasPP, $partidaJugada);
             break;
         case 2:
-
+            $nombreJugadorPP = solicitarJugador();
+            $nArregloPalabras = count($coleccionPalabrasPP);
+            $numeroAleatorioPP = rand(1, $nArregloPalabras);
+            $numeroAleatorioPP = $numeroAleatorioPP-1;
+            $palabraAleatoria = $coleccionPalabrasPP[$numeroAleatorioPP];
+            $nArregloPartidasPP = count($coleccionPartidasPP);
+            $iPP = 0;
+            while ($iPP < $nArregloPartidasPP){
+                if (($palabraAleatoria == $coleccionPartidasPP[$iPP]["palabraWordix"]) && ($nombreJugadorPP == $coleccionPartidasPP[$iPP]["jugador"])){
+                    $numeroAleatorioPP = rand(1, $nArregloPalabras);
+                    $numeroAleatorioPP = ($numeroAleatorioPP-1);
+                    $palabraAleatoria = $coleccionPalabrasPP[$numeroAleatorioPP];
+                    $iPP = 0;
+                } else {
+                    $iPP = $iPP + 1;
+                }
+            }
+            $partidaJugada = jugarWordix($palabraAleatoria, $nombreJugadorPP);
+            array_push($coleccionPartidasPP, $partidaJugada);
             break;
         case 3:
             
