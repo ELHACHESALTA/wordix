@@ -263,39 +263,69 @@ function ordenaPartidas ($coleccionPartidasOP){
 /**************************************/
 
 //Declaración de variables:
+// int $opcion, $nArregloPalabras, $numeroElegidoPP, $nArregloPartidasPP
+
+
+// string $nombreJugadorPP, $palabraElegida
+
+// array $partidaJugada
 
 
 //Inicialización de variables:
+//a) Precarga de la estructura de las partidas
+$coleccionPartidasPP = cargarPartidas ();
+//b) Precarga de la estructura de las palabras
+$coleccionPalabrasPP = cargarColeccionPalabras();
 
+$iPP = 0;
 
 //Proceso:
-$partida = jugarWordix("MELON", strtolower("MaJo"));
-//print_r($partida);
-//imprimirResultado($partida);
-
-
-
-/*
+ 
 do {
-    $opcion = ...;
-
-    
+    $opcion = seleccionarOpcion();
     switch ($opcion) {
-        case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+        case 1:
+            $nombreJugadorPP = solicitarJugador();
+            $nArregloPalabras = count($coleccionPalabrasPP);
+            echo "Elige un número para seleccionar la palabra con la que vas a jugar: ";
+            $numeroElegidoPP = solicitarNumeroEntre(1, $nArregloPalabras);
+            $numeroElegidoPP = ($numeroElegidoPP-1);
+            $palabraElegida = $coleccionPalabrasPP[$numeroElegidoPP];
+            $nArregloPartidasPP = count($coleccionPartidasPP);
+            while ($iPP < $nArregloPartidasPP){
+                if (($palabraElegida == $coleccionPartidasPP[$iPP]["palabraWordix"]) && ($nombreJugadorPP == $coleccionPartidasPP[$iPP]["jugador"])){
+                    echo "El jugador " . $nombreJugadorPP . " ya ha jugado con esta palabra. Ingrese otro número: ";
+                    $numeroElegidoPP = solicitarNumeroEntre(1, $nArregloPalabras);
+                    $numeroElegidoPP = ($numeroElegidoPP-1);
+                    $palabraElegida = $coleccionPalabrasPP[$numeroElegidoPP];
+                    $iPP = 0;
+                } else {
+                    $iPP = $iPP + 1;
+                }
+            }
+            $partidaJugada = jugarWordix($palabraElegida, $nombreJugadorPP);
+            array_push($coleccionPartidasPP, $partidaJugada);
+            break;
+        case 2:
 
             break;
-        case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
-
+        case 3:
+            
             break;
-        case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+        case 4:
+            
             break;
-        
-            //...
+        case 5:
+            
+            break;
+        case 6:
+            
+            break;
+        case 7:
+            
+            break;
+        case 8:
+            
+            break;
     }
-} while ($opcion != X);
-*/
-
+} while ($opcion != 8);
