@@ -271,6 +271,7 @@ function ordenaPartidas ($coleccionPartidasOP){
 
 // string $nombreJugadorPP, $palabraElegida (case 1)
 // string $palabraAleatoria (case 2)
+// string $palabraPP (case 7)
 
 // array $partidaJugada (case 1)
 // array $resumenFinalJugador (case 5)
@@ -377,10 +378,25 @@ do {
             ordenaPartidas($coleccionPartidasPP);
             break;
         case 7:
-            
+            $palabraPP = leerPalabra5Letras();
+            $nArregloPalabras = count($coleccionPalabrasPP);
+            $iPP = 0;
+            while ($iPP < $nArregloPalabras){
+                if ($palabraPP == $coleccionPalabrasPP[$iPP]){
+                    echo "La palabra que desea agregar ya pertenece a las palabras de wordix. \n";
+                    $palabraPP = leerPalabra5Letras();
+                    $iPP = 0;
+                } else {
+                    $iPP = $iPP + 1;
+                }
+            }
+            $coleccionPalabrasPP = agregarPalabra($coleccionPalabrasPP, $palabraPP);
             break;
         case 8:
-            
+            echo "\n";
+            echo "***************************************************\n";
+            echo "*********** ¡Gracias por jugar Wordix! ************\n";
+            echo "***************************************************\n";
             break;
     }
 } while ($opcion != 8);
