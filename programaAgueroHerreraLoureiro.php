@@ -267,13 +267,13 @@ function ordenaPartidas ($coleccionPartidasOP){
 // int $numeroAleatorioPP (case 2)
 // int $numeroPartidaPP (case 3)
 // int $primeraGanada (case 4)
-
+// int $porcentajeVictorias (case 5)
 
 // string $nombreJugadorPP, $palabraElegida (case 1)
 // string $palabraAleatoria (case 2)
 
 // array $partidaJugada (case 1)
-
+// array $resumenFinalJugador (case 5)
 
 //Inicialización de variables:
 //a) Precarga de la estructura de las partidas
@@ -350,7 +350,28 @@ do {
             }
             break;
         case 5:
-            
+            echo "Para ver las estadisticas del jugador, ";
+            $nombreJugadorPP = solicitarJugador();
+            $resumenFinalJugador = retornaResumenJugador($coleccionPartidasPP, $nombreJugadorPP);
+            if ($resumenFinalJugador["partidas"] == 0){
+                echo "El jugador no ha jugado ninguna partida";
+            } else {
+            echo "**********************************\n";
+            echo "Jugador: " . $resumenFinalJugador["jugador"] . "\n";
+            echo "Partidas: " . $resumenFinalJugador["partidas"] . "\n";
+            echo "Puntaje Total: " . $resumenFinalJugador["puntaje"] . "\n";
+            echo "Victorias: " . $resumenFinalJugador["victorias"] . "\n";
+            $porcentajeVictorias = (int)(($resumenFinalJugador["victorias"]*100)/$resumenFinalJugador["partidas"]);
+            echo "Porcentaje Victorias: " . $porcentajeVictorias . "%\n";
+            echo "Adivinadas: \n";
+            echo "    Intento 1: " . $resumenFinalJugador["intento1"] . "\n";
+            echo "    Intento 2: " . $resumenFinalJugador["intento2"] . "\n";
+            echo "    Intento 3: " . $resumenFinalJugador["intento3"] . "\n";
+            echo "    Intento 4: " . $resumenFinalJugador["intento4"] . "\n";
+            echo "    Intento 5: " . $resumenFinalJugador["intento5"] . "\n";
+            echo "    Intento 6: " . $resumenFinalJugador["intento6"] . "\n";
+            echo "**********************************\n";
+            }
             break;
         case 6:
             ordenaPartidas($coleccionPartidasPP);
