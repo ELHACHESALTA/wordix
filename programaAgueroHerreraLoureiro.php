@@ -223,6 +223,40 @@ function solicitarJugador (){
     return $nombreFinal;
 }
 
+///////////////////////////// FUNCION 11 /////////////////////////////////////////
+// Función de comparación
+/**
+ * Funcion de comparacion para la utilización de la funcion predefinida uasort en el modulo ordenaPartidas
+ * @param array $partida1
+ * @param array $partida2
+ * @return int
+ */
+function cmp($partida1, $partida2) {
+    // $int $orden
+    if ($partida1["jugador"] == $partida2["jugador"]){
+        if ($partida1["palabraWordix"] == $partida2["palabraWordix"]){
+            $orden = 0;
+        } elseif ($partida1["palabraWordix"] < $partida2["palabraWordix"]){
+            $orden = -1;
+        } else {
+            $orden = 1;
+        }
+    } elseif ($partida1["jugador"] < $partida2["jugador"]){
+        $orden = -1;
+    } else {
+        $orden = 1;
+    }
+    return $orden;
+}
+/**
+ * Muestra coleccion de partidas de manera ordenada
+ * @param array $coleccionPartidasOP
+ */
+function ordenaPartidas ($coleccionPartidasOP){
+    uasort($coleccionPartidasOP, "cmp");
+    print_r($coleccionPartidasOP);
+}
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
