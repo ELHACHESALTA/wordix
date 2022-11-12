@@ -90,9 +90,8 @@ function seleccionarOpcion () {
  * @param array $coleccionPartidasIR
  */
 function imprimirResultado($numeroPartidaIR, $coleccionPartidasIR) {
-    $numeroPartidaIR = $numeroPartidaIR - 1;
     echo "**********************************\n";
-    echo "Partida WORDIX " . $numeroPartidaIR . ": palabra " . $coleccionPartidasIR[$numeroPartidaIR]["palabraWordix"] . "\n";
+    echo "Partida WORDIX " . ($numeroPartidaIR+1) . ": palabra " . $coleccionPartidasIR[$numeroPartidaIR]["palabraWordix"] . "\n";
     echo "Jugador: " . $coleccionPartidasIR[$numeroPartidaIR]["jugador"] . "\n";
     echo "Puntaje: " . $coleccionPartidasIR[$numeroPartidaIR]["puntaje"] . " puntos" . "\n";
     if ($coleccionPartidasIR[$numeroPartidaIR]["intentos"] != 0) {
@@ -346,7 +345,6 @@ do {
             } elseif ($primeraGanada == -1){
                 echo "El jugador " . $nombreJugadorPP . " no ganó ninguna partida \n";
             } else {
-                $primeraGanada = $primeraGanada + 1;
                 imprimirResultado($primeraGanada, $coleccionPartidasPP);
             }
             break;
@@ -355,7 +353,7 @@ do {
             $nombreJugadorPP = solicitarJugador();
             $resumenFinalJugador = retornaResumenJugador($coleccionPartidasPP, $nombreJugadorPP);
             if ($resumenFinalJugador["partidas"] == 0){
-                echo "El jugador no ha jugado ninguna partida";
+                echo "El jugador no ha jugado ninguna partida\n";
             } else {
             echo "**********************************\n";
             echo "Jugador: " . $resumenFinalJugador["jugador"] . "\n";
