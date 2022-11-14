@@ -23,6 +23,7 @@ include_once("wordix.php");
  */
 function cargarColeccionPalabras()
 {
+    // array $coleccionPalabras
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
@@ -90,6 +91,7 @@ function seleccionarOpcion () {
  * @param array $coleccionPartidasIR
  */
 function imprimirResultado($numeroPartidaIR, $coleccionPartidasIR) {
+    $numeroPartidaIR = $numeroPartidaIR - 1;
     echo "**********************************\n";
     echo "Partida WORDIX " . ($numeroPartidaIR+1) . ": palabra " . $coleccionPartidasIR[$numeroPartidaIR]["palabraWordix"] . "\n";
     echo "Jugador: " . $coleccionPartidasIR[$numeroPartidaIR]["jugador"] . "\n";
@@ -256,13 +258,31 @@ function ordenaPartidas ($coleccionPartidasOP){
     print_r($coleccionPartidasOP);
 }
 
+///////////////////////////// FUNCION ADICIONAL /////////////////////////////////////////
+/**
+ * Función que según las palabras usadas y la coleccion de palabras determina si el usuario puede seguir jugando
+ * @param int $cantPalabrasHJ
+ * @param int $palabrasUsadasHJ
+ * @return boolean
+ */
+function habilitaAJugar ($cantPalabrasHJ, $palabrasUsadasHJ){
+    // boolean $habilitado
+    if ($cantPalabrasHJ != $palabrasUsadasHJ){
+        $habilitado = true;                                                                
+    } else {                                                                               
+        $habilitado = false;                                                               
+        echo "El jugador ya ha jugado con todas las palabras disponibles.\n";              
+        echo "Para volver a jugar, debes volver a empezar o agregar una nueva palabra.\n"; 
+    }
+    return $habilitado;
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
 
 //Declaración de variables:
-// int $opcion, $nArregloPalabras, $numeroElegidoPP, $nArregloPartidasPP, $iPP (case 1)
+// int $opcion, $nArregloPalabras, $numeroElegidoPP, $nArregloPartidasPP, $iPP, $jPP, $palabrasUsadasPP (case 1)
 // int $numeroAleatorioPP (case 2)
 // int $numeroPartidaPP (case 3)
 // int $primeraGanada (case 4)
@@ -274,6 +294,8 @@ function ordenaPartidas ($coleccionPartidasOP){
 
 // array $partidaJugada (case 1)
 // array $resumenFinalJugador (case 5)
+
+// boolean $puedeJugar (case 1)
 
 //Inicialización de variables:
 //a) Precarga de la estructura de las partidas
@@ -295,7 +317,15 @@ do {
             $palabraElegida = $coleccionPalabrasPP[$numeroElegidoPP];
             $nArregloPartidasPP = count($coleccionPartidasPP);
             $iPP = 0;
-            while ($iPP < $nArregloPartidasPP){
+            $jPP = 0;
+            $palabrasUsadasPP = 0;
+            for ($jPP; $jPP < $nArregloPartidasPP; $jPP++){
+                if ($nombreJugadorPP == $coleccionPartidasPP[$jPP]["jugador"]){
+                    $palabrasUsadasPP++;
+                }
+            }
+            $puedeJugar = habilitaAJugar($nArregloPalabras, $palabrasUsadasPP);
+            while ($iPP < $nArregloPartidasPP && $puedeJugar){
                 if (($palabraElegida == $coleccionPartidasPP[$iPP]["palabraWordix"]) && ($nombreJugadorPP == $coleccionPartidasPP[$iPP]["jugador"])){
                     echo "El jugador " . $nombreJugadorPP . " ya ha jugado con esta palabra. Ingrese otro número: ";
                     $numeroElegidoPP = solicitarNumeroEntre(1, $nArregloPalabras);
@@ -306,8 +336,11 @@ do {
                     $iPP = $iPP + 1;
                 }
             }
-            $partidaJugada = jugarWordix($palabraElegida, $nombreJugadorPP);
-            array_push($coleccionPartidasPP, $partidaJugada);
+            if ($puedeJugar){
+                $palabrasUsadasPP++;
+                $partidaJugada = jugarWordix($palabraElegida, $nombreJugadorPP);
+                array_push($coleccionPartidasPP, $partidaJugada);
+            }
             break;
         case 2:
             $nombreJugadorPP = solicitarJugador();
@@ -317,7 +350,15 @@ do {
             $palabraAleatoria = $coleccionPalabrasPP[$numeroAleatorioPP];
             $nArregloPartidasPP = count($coleccionPartidasPP);
             $iPP = 0;
-            while ($iPP < $nArregloPartidasPP){
+            $jPP = 0;
+            $palabrasUsadasPP = 0;
+            for ($jPP; $jPP < $nArregloPartidasPP; $jPP++){
+                if ($nombreJugadorPP == $coleccionPartidasPP[$jPP]["jugador"]){
+                    $palabrasUsadasPP++;
+                }
+            }
+            $puedeJugar = habilitaAJugar($nArregloPalabras, $palabrasUsadasPP);
+            while ($iPP < $nArregloPartidasPP && $puedeJugar){
                 if (($palabraAleatoria == $coleccionPartidasPP[$iPP]["palabraWordix"]) && ($nombreJugadorPP == $coleccionPartidasPP[$iPP]["jugador"])){
                     $numeroAleatorioPP = rand(1, $nArregloPalabras);
                     $numeroAleatorioPP = ($numeroAleatorioPP-1);
@@ -327,8 +368,11 @@ do {
                     $iPP = $iPP + 1;
                 }
             }
-            $partidaJugada = jugarWordix($palabraAleatoria, $nombreJugadorPP);
-            array_push($coleccionPartidasPP, $partidaJugada);
+            if ($puedeJugar){
+                $palabrasUsadasPP++;
+                $partidaJugada = jugarWordix($palabraAleatoria, $nombreJugadorPP);
+                array_push($coleccionPartidasPP, $partidaJugada);
+            }
             break;
         case 3:
             $nArregloPartidasPP = count($coleccionPartidasPP);
@@ -345,6 +389,7 @@ do {
             } elseif ($primeraGanada == -1){
                 echo "El jugador " . $nombreJugadorPP . " no ganó ninguna partida \n";
             } else {
+                $primeraGanada = $primeraGanada + 1;
                 imprimirResultado($primeraGanada, $coleccionPartidasPP);
             }
             break;
